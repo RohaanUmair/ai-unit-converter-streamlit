@@ -24,12 +24,11 @@ if 'history' not in st.session_state:
     st.session_state['history'] = []
     intro_message = "Hello! I am your unit conversion assistant. Ask me to convert units, and I'll do my best to help. For example, you can ask me to convert kilometers to meters."
     st.session_state['history'].append({'role': 'model', 'parts': [intro_message]})
-    st.chat_message('assistant').write(intro_message)
 
+st.title('Unit Convertion using AI')
 chat_input = st.chat_input('Enter your prompt')
 
 if chat_input:
-    st.chat_message('user').write(chat_input)
     st.session_state['history'].append({'role': 'user', 'parts': [chat_input]})
 
     chat_session = model.start_chat(
@@ -39,5 +38,10 @@ if chat_input:
     prompt_prefix = "You are a unit conversion tool. Only respond to unit conversion requests. If a request is not a unit conversion, say 'I can only perform unit conversions.'\n\n"
     response = chat_session.send_message(prompt_prefix + chat_input)
 
-    st.chat_message('assistant').write(response.text)
     st.session_state['history'].append({'role': 'model', 'parts': [response.text]})
+
+# Display all messages from the history
+for message in st.session_state['history']:
+    role = message['role']
+    content = message['parts'][0]
+    st.chat_message(role).write(content)
