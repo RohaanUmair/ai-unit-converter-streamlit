@@ -20,12 +20,16 @@ model = genai.GenerativeModel(
     system_instruction="You are a unit conversion tool. Only respond to unit conversion requests. If a request is not a unit conversion, say 'I can only perform unit conversions.' And if the request is not between valid units say 'Cannot convert between these units.' and tell the reason."
 )
 
+# Title
+st.markdown('<h1 style="position: fixed; font-size: 40px; margin-bottom: 40px;">Unit Conversion using AI</h1>', unsafe_allow_html=True)
+st.markdown("<br>", unsafe_allow_html=True)
+
+
 if 'history' not in st.session_state:
     st.session_state['history'] = []
     intro_message = "Hello! I am your unit conversion assistant. Ask me to convert units, and I'll do my best to help. For example, you can ask me to convert kilometers to meters."
     st.session_state['history'].append({'role': 'assistant', 'parts': [intro_message]})
 
-st.title('Unit Convertion using AI')
 chat_input = st.chat_input('Enter your prompt')
 
 if chat_input:
