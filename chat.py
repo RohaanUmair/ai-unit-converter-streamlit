@@ -23,7 +23,7 @@ model = genai.GenerativeModel(
 if 'history' not in st.session_state:
     st.session_state['history'] = []
     intro_message = "Hello! I am your unit conversion assistant. Ask me to convert units, and I'll do my best to help. For example, you can ask me to convert kilometers to meters."
-    st.session_state['history'].append({'role': 'model', 'parts': [intro_message]})
+    st.session_state['history'].append({'role': 'assistant', 'parts': [intro_message]})
 
 st.title('Unit Convertion using AI')
 chat_input = st.chat_input('Enter your prompt')
@@ -38,7 +38,7 @@ if chat_input:
     prompt_prefix = "You are a unit conversion tool. Only respond to unit conversion requests. If a request is not a unit conversion, say 'I can only perform unit conversions.'\n\n"
     response = chat_session.send_message(prompt_prefix + chat_input)
 
-    st.session_state['history'].append({'role': 'model', 'parts': [response.text]})
+    st.session_state['history'].append({'role': 'assistant', 'parts': [response.text]})
 
 # Display all messages from the history
 for message in st.session_state['history']:
