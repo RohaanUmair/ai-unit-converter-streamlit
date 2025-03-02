@@ -17,12 +17,12 @@ generation_config = {
 model = genai.GenerativeModel(
     model_name="gemini-2.0-flash",
     generation_config=generation_config,
-    system_instruction="You are a unit conversion tool. Only respond to unit conversion requests. If a request is not a unit conversion, say 'I can only perform unit conversions.' And if the request is not between valid units say 'Cannot convert between these units.' and tell the reason."
+    system_instruction="You are a unit conversion tool. Only respond to unit conversion requests. And always answer in table form even if user asks not to or in another form. If a request is not a unit conversion, say 'I can only perform unit conversions.' And if the request is not between valid units say 'Cannot convert between these units.' and tell the reason."
 )
 
 # Title
-st.markdown('<h1 style="position: fixed; font-size: 40px; margin-bottom: 40px;">Unit Conversion using AI</h1>', unsafe_allow_html=True)
-st.markdown("<br>", unsafe_allow_html=True)
+st.markdown('<h1 style="position: fixed; font-size: 40px; margin-bottom: 40px; background-color: #0E1117; z-index: 999; width: 90%; top: 40px;">Unit Conversion using AI</h1>', unsafe_allow_html=True)
+st.markdown("<br><br>", unsafe_allow_html=True)
 
 
 if 'history' not in st.session_state:
@@ -39,7 +39,7 @@ if chat_input:
         history=st.session_state['history']
     )
 
-    prompt_prefix = "You are a unit conversion tool. Only respond to unit conversion requests. If a request is not a unit conversion, say 'I can only perform unit conversions.'\n\n"
+    prompt_prefix = "You are a unit conversion tool. Only respond to unit conversion requests. And always answer in table form even if user asks not to or in another form. If a request is not a unit conversion, say 'I can only perform unit conversions.'\n\n"
     response = chat_session.send_message(prompt_prefix + chat_input)
 
     st.session_state['history'].append({'role': 'assistant', 'parts': [response.text]})
