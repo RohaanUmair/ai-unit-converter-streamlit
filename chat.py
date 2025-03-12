@@ -20,6 +20,13 @@ model = genai.GenerativeModel(
     system_instruction="You are a unit conversion tool. Only respond to unit conversion requests. And always answer in table form even if user asks not to or in another form. If a request is not a unit conversion, say 'I can only perform unit conversions.' And if the request is not between valid units say 'Cannot convert between these units.' and tell the reason."
 )
 
+
+st.set_page_config(
+    page_title="Unit Conversion using AI",
+    page_icon="🤖",
+    initial_sidebar_state="collapsed",
+)
+
 # Title
 st.markdown('<h1 style="position: fixed; font-size: 40px; margin-bottom: 40px; background-color: #0E1117; z-index: 999; width: 90%; top: 40px;">Unit Conversion using AI</h1>', unsafe_allow_html=True)
 st.markdown("<br><br>", unsafe_allow_html=True)
